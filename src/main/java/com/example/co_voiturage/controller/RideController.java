@@ -4,6 +4,7 @@ package com.example.co_voiturage.controller;
 import com.example.co_voiturage.model.Ride;
 import com.example.co_voiturage.model.User;
 import com.example.co_voiturage.service.RideService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -18,9 +19,10 @@ public class RideController {
     private RideService rideService;
 
     @GetMapping("/rides")
-    public String viewRidesPage(Model model, @AuthenticationPrincipal User currentUser) {
+    public String viewRidesPage(HttpSession session, Model model) {
+        String userRole = (String) session.getAttribute("userRole");//aAutomatically retrieved
         model.addAttribute("listRides", rideService.getAllRides());
-        model.addAttribute("userRole", currentUser.getRole());
+        model.addAttribute("userRole",userRole);
         return "rides";
     }
 

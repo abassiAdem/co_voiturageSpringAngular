@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 @Controller
+@SessionAttributes("userRole")
 public class AuthController {
     @Autowired
     private UserService userService;
@@ -27,10 +29,9 @@ public class AuthController {
     public String loginUser(@ModelAttribute User user, HttpSession session, Model model) {
         User existingUser = userService.findByUsername(user.getUsername());
 
-        if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
+        if (existingUser != null && existingUser.getPassword().equals(user.getPassword()) && existingUser.getRole().equals(user.getRole())   ) {
             session.setAttribute("loggedInUser", existingUser);
-
-            model.addAttribute("userRole", existingUser.getRole());
+            session.setAttribute("userRole", existingUser.getRole());
 
             return "redirect:/rides";
         } else {

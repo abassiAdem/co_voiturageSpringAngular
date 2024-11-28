@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Carpooling Management</title>
-    <link rel="stylesheet" th:href="@{/css/ridesstyle.css}">
+    <link rel="stylesheet" th:href="@{css/ridesstyle.css}">
 </head>
 <body>
 <nav class="navbar">
@@ -11,10 +11,8 @@
         <li><a href="/profile">Profile</a></li>
         <li><a href="/rides">Accueil</a></li>
         <li><a href="/history">Historique</a></li>
-
-        <!-- Display "Add New Ride" link only for users with the role "conducteur"-->
-        <li th:if="${userRole == 'conducteur'}"><a href="/showNewRideForm">Add New Ride</a></li>
         <li><a href="/notifications">Notifications</a></li>
+        <li th:if="${userRole != null && userRole == 'conducteur'}"><a href="/showNewRideForm">Add New Ride</a></li>
     </ul>
 </nav>
 

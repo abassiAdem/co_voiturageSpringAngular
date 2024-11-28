@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/new_ridestyle.css}">
+    <title>Publier un trajet</title>
+</head>
+<body>
+<div class="center">
+    <h1>Publier un trajet</h1>
+
+    <form action="/saveRide" method="post" th:object="${ride}">
+        <!-- Name -->
+        <div class="txt_field2">
+            <div class="text">
+                <input type="text" id="name" name="name" placeholder="Nom" th:field="*{name}" required>
+            </div>
+        </div>
+
+        <!-- Depart & Destination -->
+        <div class="txt_field2">
+            <div class="text">
+                <input type="text" id="depart" name="origin" placeholder="Départ" th:field="*{depart}" required>
+            </div>
+            <div class="text">
+                <input type="text" id="destination" name="destination" placeholder="Destination" th:field="*{destination}" required>
+            </div>
+        </div>
+
+        <!-- Date & Number of Places -->
+        <div class="txt_field2">
+            <div class="text">
+                <label for="date_depart">Date de départ:</label>
+                <input type="date" id="date_depart" name="dateDepart" th:field="*{dateDepart}" required>
+            </div>
+            <div class="text">
+                <label for="nbr_places">Nombre de places:</label>
+                <input type="number" id="nbr_places" name="nbr_places" placeholder="Nombre de places" th:field="*{nbrPlaces}" min="1" required>
+            </div>
+        </div>
+
+        <!-- Price & Restrictions -->
+        <div class="txt_field2">
+            <div class="text">
+                <label for="prix_places">Prix par place (€):</label>
+                <input type="number" id="prix_places" name="price" placeholder="Prix par place" th:field="*{price}" min="0" step="0.01" required>
+            </div>
+            <div class="text">
+                <label for="restrictions">Restrictions:</label>
+                <input type="text" id="restrictions" name="restrictions" placeholder="Restrictions" th:field="*{restrictions}">
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn" type="submit">Publier</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Carpooling Management</title>
+    <link rel="stylesheet" th:href="@{/css/ridesstyle.css}">
+</head>
+<body>
+<nav class="navbar">
+    <ul>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/rides">Accueil</a></li>
+        <li><a href="/history">Historique</a></li>
+
+        <!-- Display "Add New Ride" link only for users with the role "conducteur"-->
+        <li th:if="${userRole == 'conducteur'}"><a href="/showNewRideForm">Add New Ride</a></li>
+        <li><a href="/notifications">Notifications</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <section class="publications">
+        <h2>Publications</h2>
+        <div class="publication-list">
+
+            <!-- Thymeleaf loop to display ride data -->
+            <div th:each="ride : ${listRides}">
+                <div class="publication-card">
+                    <div class="details-row">
+                        <div class="time-route">
+                            <div class="time">
+                                <strong th:text="${ride.dateDepart}"></strong>
+                            </div>
+                            <div class="route">
+                                <span th:text="${ride.depart}"></span> ➝
+                                <span th:text="${ride.destination}"></span>
+                            </div>
+                            <div class="route">
+                                <span>Places disponibles : </span><span th:text="${ride.nbrPlaces}"></span>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <span th:text="${ride.price + ' DT'}"></span>
+                        </div>
+                    </div>
+                    <div class="driver-row">
+                        <div class="driver-info">
+                            <img th:src="@{'/path/to/profile-pic.jpg'}" alt="Driver Picture" class="profile-pic">
+                            <div>
+                                <span th:text="${ride.name}"></span>
+                                <span class="rating">⭐</span>
+                                <span class="badge">Super Driver</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+</body>
+</html>

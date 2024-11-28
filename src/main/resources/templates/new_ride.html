@@ -11,14 +11,14 @@
     <h1>Publier un trajet</h1>
 
     <form action="/saveRide" method="post" th:object="${ride}">
-        <!-- Name -->
+
         <div class="txt_field2">
             <div class="text">
                 <input type="text" id="name" name="name" placeholder="Nom" th:field="*{name}" required>
             </div>
         </div>
 
-        <!-- Depart & Destination -->
+
         <div class="txt_field2">
             <div class="text">
                 <input type="text" id="depart" name="origin" placeholder="Départ" th:field="*{depart}" required>
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <!-- Date & Number of Places -->
+
         <div class="txt_field2">
             <div class="text">
                 <label for="date_depart">Date de départ:</label>
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <!-- Price & Restrictions -->
+
         <div class="txt_field2">
             <div class="text">
                 <label for="prix_places">Prix par place (€):</label>
@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <!-- Submit Button -->
+
         <button class="btn" type="submit">Publier</button>
     </form>
 </div>

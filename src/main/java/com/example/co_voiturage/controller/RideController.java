@@ -26,7 +26,6 @@ public class RideController {
         return "rides";
     }
 
-
     @GetMapping("/showNewRideForm")
     public String showNewRideForm(Model model) {
         Ride ride = new Ride();

@@ -22,5 +22,4 @@ public class Ride {
     private double price;
     private String restrictions;
     private Long userId;
-    // Getters and Setters
 }

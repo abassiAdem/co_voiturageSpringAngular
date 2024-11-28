@@ -10,14 +10,11 @@ import java.util.List;
 
 @Service
 public class RideService {
-
     @Autowired
     private RideRepository rideRepository;
-
     public List<Ride> getAllRides() {
         return rideRepository.findAll();
     }
-
     public void saveRide(Ride ride) {
         rideRepository.save(ride);
     }

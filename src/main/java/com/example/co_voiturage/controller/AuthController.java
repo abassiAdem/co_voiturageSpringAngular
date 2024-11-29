@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 @Controller
-@SessionAttributes("userRole")
+
+@SessionAttributes({"userRole", "userId", "userName"})
 public class AuthController {
     @Autowired
     private UserService userService;
@@ -32,6 +33,8 @@ public class AuthController {
         if (existingUser != null && existingUser.getPassword().equals(user.getPassword()) && existingUser.getRole().equals(user.getRole())   ) {
             session.setAttribute("loggedInUser", existingUser);
             session.setAttribute("userRole", existingUser.getRole());
+            session.setAttribute("userId", existingUser.getId());
+            session.setAttribute("userName", existingUser.getUsername());
 
             return "redirect:/rides";
         } else {
@@ -49,7 +52,19 @@ public class AuthController {
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:/register";
+        return "redirect:/Auth";
+    }
+
+    @GetMapping("/riderregister")
+    public String showriderRegistrationForm(Model model) {
+        model.addAttribute("user", new User());
+        return "riderregister";
+    }
+
+    @PostMapping("/riderregister")
+    public String rideregisterUser(@ModelAttribute("user") User user) {
+        userService.saveUser(user);
+        return "redirect:/Auth";
     }
 
     @GetMapping("/logout")

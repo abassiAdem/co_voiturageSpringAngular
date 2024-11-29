@@ -14,7 +14,7 @@
 <body>
 <div class="center">
     <div class="con-center">
-        <form th:action="@{/register}" th:object="${user}" class="container" method="POST">
+        <form th:action="@{/riderregister}" th:object="${user}" class="container" method="POST">
             <h1>S'inscrire</h1>
             <div class="con-lbl">
                 <div class="txt_field2">
@@ -30,7 +30,7 @@
                         <span></span>
                     </div>
                     <div class="text">
-                        <input type="text" placeholder="Role" id="role" name="role" value="passager" required>
+                        <input type="text" placeholder="Role" id="role" name="role" value="conducteur" required>
                         <span></span>
                     </div>
                 </div>

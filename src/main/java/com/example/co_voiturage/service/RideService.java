@@ -15,7 +15,14 @@ public class RideService {
     public List<Ride> getAllRides() {
         return rideRepository.findAll();
     }
+    public List<Ride> searchRide(String dateDepart, String destination, String depart, int nbrPlaces ) {
+        return  rideRepository.searchRideByDateDepartAndDestinationAndDepartAndNbrPlaces(dateDepart,destination,depart,nbrPlaces);
+    }
+
     public void saveRide(Ride ride) {
         rideRepository.save(ride);
     }
+
+
+
 }

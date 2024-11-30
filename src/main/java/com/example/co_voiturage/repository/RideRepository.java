@@ -8,5 +8,4 @@ import java.util.List;
 public interface RideRepository extends JpaRepository<Ride, Long> {
     List<Ride> searchRideByDateDepartAndDestinationAndDepartAndNbrPlaces(String dateDepart, String destination, String depart, int nbrPlaces);
 
-
 }

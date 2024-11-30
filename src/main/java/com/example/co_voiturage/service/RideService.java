@@ -1,21 +1,30 @@
 package com.example.co_voiturage.service;
 
 
+import com.example.co_voiturage.model.Reservation;
 import com.example.co_voiturage.model.Ride;
+import com.example.co_voiturage.repository.ReservationRepository;
 import com.example.co_voiturage.repository.RideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RideService {
+
     @Autowired
     private RideRepository rideRepository;
     public List<Ride> getAllRides() {
         return rideRepository.findAll();
     }
+
+    public List<Ride> findAllById(List<Long> ids) {
+        return rideRepository.findAllById(ids);
+    }
+
     public List<Ride> searchRide(String dateDepart, String destination, String depart, int nbrPlaces ) {
         return  rideRepository.searchRideByDateDepartAndDestinationAndDepartAndNbrPlaces(dateDepart,destination,depart,nbrPlaces);
     }
@@ -30,6 +39,24 @@ public class RideService {
         if (optionalRide.isPresent()) {
             Ride ride = optionalRide.get();
             int updatedSeats = ride.getNbrPlaces() - seats;
+
+            if (updatedSeats >= 0) {
+                ride.setNbrPlaces(updatedSeats);
+                rideRepository.save(ride);
+            } else {
+                System.out.println("Pas assez de places disponibles.");
+            }
+        } else {
+            System.out.println("Trajet introuvable.");
+        }
+    }
+
+    public void backAvailableSeats(Long rideId, int seats) {
+        Optional<Ride> optionalRide = rideRepository.findById(rideId);
+
+        if (optionalRide.isPresent()) {
+            Ride ride = optionalRide.get();
+            int updatedSeats = ride.getNbrPlaces() + seats;
 
             if (updatedSeats >= 0) {
                 ride.setNbrPlaces(updatedSeats);

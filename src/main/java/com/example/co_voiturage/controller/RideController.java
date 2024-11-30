@@ -39,8 +39,10 @@ public class RideController {
 
     @GetMapping("/showNewRideForm")
     public String showNewRideForm(HttpSession session, Model model) {
-        String userName = (String) session.getAttribute("userName");//aAutomatically retrieved
+        String userName = (String) session.getAttribute("userName");
+        Long userId = (Long) session.getAttribute("userId");
         model.addAttribute("userName",userName);
+        model.addAttribute("userId",userId);
         Ride ride = new Ride();
         model.addAttribute("ride", ride);
         return "new_ride";
@@ -59,6 +61,8 @@ public class RideController {
         model.addAttribute("listRides", rideService.searchRide(date_depart, destination, depart, nbr_places));
         return "rides";
     }
+
+
 
 
 

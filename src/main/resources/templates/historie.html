@@ -12,33 +12,12 @@
         <li><a href="/rides">Accueil</a></li>
         <li><a href="/historie">Historique</a></li>
         <li><a href="/notifications">Notifications</a></li>
-        <li th:if="${userRole != null && userRole == 'conducteur'}"><a href="/showNewRideForm">Add New Ride</a></li>
+
         <li><a href="/logout">logout</a></li>
     </ul>
 </nav>
 
-<div class="search-bar">
-    <form action="/UserHomePage" method="post" class="filter-form" th:object="${searchCriteria}">
-        <div class="input-group">
-            <label for="depart">Départ</label>
-            <input type="text" id="depart" name="depart" placeholder="Départ" required>
-        </div>
 
-        <div class="input-group">
-            <label for="destination">Destination</label>
-            <input type="text" id="destination" name="destination" placeholder="Destination" required>
-        </div>
-        <div class="input-group">
-            <label for="date">Aujourd'hui</label>
-            <input type="date" id="date" name="date_depart" required>
-        </div>
-        <div class="input-group">
-            <label for="passengers">Passagers</label>
-            <input type="number" id="passengers" name="nbr_places" min="1" placeholder="1 passager" required>
-        </div>
-        <button type="submit" class="btn-search" name="action" value="filter">Rechercher</button>
-    </form>
-</div>
 
 <div class="container">
     <section class="publications">
@@ -74,15 +53,7 @@
                                 <span class="badge">Super Driver</span>
                             </div>
                         </div>
-                        <form action="/saveReservation" method="POST" th:object="${reservation}">
-                            <input type="hidden" th:value="${ride.id}" name="rideid"><!-- fi blaset th:field="*{rideid}" th:value="${ride.id}"  -->
-                            <input type="hidden" th:value="${userId}" name="userid">
 
-                            <div class="input-group">
-                                <input type="number" name="reserve_place" placeholder="nbr places" th:field="*{nbr_places}" required>
-                            </div>
-                            <button type="submit">Réserver</button>
-                        </form>
 
                     </div>
                 </div>

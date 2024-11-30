@@ -34,7 +34,7 @@
         </div>
         <div class="input-group">
             <label for="passengers">Places</label>
-            <input type="number" id="passengers" name="nbr_places" min="1" placeholder="1 place" required>
+            <input type="number" id="passengers" name="nbr_places" min="1" max="4" placeholder="1 place" required>
         </div>
         <button type="submit" class="btn-search" name="action" value="filter">Rechercher</button>
     </form>
@@ -42,10 +42,8 @@
 
 <div class="container">
     <section class="publications">
-        <h2>Publications</h2>
         <div class="publication-list">
 
-            <!-- Thymeleaf loop to display ride data -->
             <div th:each="ride : ${listRides}">
                 <div class="publication-card">
                     <div class="details-row">
@@ -79,7 +77,7 @@
                             <input type="hidden" th:value="${userId}" name="userid">
 
                             <div class="input-group">
-                                <input type="number" name="reserve_place" placeholder="nbr places" th:field="*{nbr_places}" required>
+                                <input type="number" name="reserve_place" placeholder="nbr places" min="1" max="4" th:field="*{nbr_places}" required>
                             </div>
                             <button type="submit">Réserver</button>
                         </form>

@@ -50,7 +50,6 @@ public class ReservationController {
         model.addAttribute("userId",userId);
         List<ReservationRideDTO> reservationRides = new ArrayList<>();
 
-        // Supposez que vous avez des méthodes appropriées pour obtenir les détails nécessaires
         List<Reservation> reservations = reservationService.findAllByUserid(userId);
 
         for (Reservation reservation : reservations) {
@@ -69,8 +68,6 @@ public class ReservationController {
     @PostMapping("/deleteReservation")
     public String deleteReservation(@ModelAttribute("reservation") Reservation reservation) {
 
-        System.out.println(reservation.getRideid());
-        System.out.println(reservation.getNbr_places());
         reservationService.deleteReservation(reservation);
         return "redirect:/historie";
     }

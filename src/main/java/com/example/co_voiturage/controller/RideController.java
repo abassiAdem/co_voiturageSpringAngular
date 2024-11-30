@@ -3,9 +3,6 @@ package com.example.co_voiturage.controller;
 
 import com.example.co_voiturage.model.Reservation;
 import com.example.co_voiturage.model.Ride;
-import com.example.co_voiturage.model.User;
-import com.example.co_voiturage.repository.RideRepository;
-import com.example.co_voiturage.service.ReservationService;
 import com.example.co_voiturage.service.RideService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +29,7 @@ public class RideController {
         model.addAttribute("listRides", rideService.getAllRides());
         model.addAttribute("userRole",userRole);
         model.addAttribute("userId",userId);
-        Reservation reservation = new Reservation();
-        model.addAttribute("reservation",reservation);
+        model.addAttribute("reservation",new Reservation());
         return "rides";
     }
 
@@ -54,11 +50,13 @@ public class RideController {
         return "redirect:/rides";
     }
 
+
     @PostMapping("/UserHomePage")
     public String filterRides(@RequestParam String depart, @RequestParam String destination,
                               @RequestParam String date_depart, @RequestParam int nbr_places, Model model) {
 
         model.addAttribute("listRides", rideService.searchRide(date_depart, destination, depart, nbr_places));
+        model.addAttribute("reservation",new Reservation());
         return "rides";
     }
 

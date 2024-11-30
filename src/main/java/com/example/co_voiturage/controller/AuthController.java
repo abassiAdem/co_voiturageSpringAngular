@@ -67,9 +67,23 @@ public class AuthController {
         return "redirect:/Auth";
     }
 
+
+
+    @GetMapping("/profile")
+    public String profileUser(HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("userId");
+        model.addAttribute("user", userService.findByid(userId));
+
+        return "profile";
+    }
+
+
+
     @GetMapping("/logout")
     public String logoutUser(HttpSession session) {
         session.invalidate();
         return "redirect:/Auth";
     }
+
+
 }

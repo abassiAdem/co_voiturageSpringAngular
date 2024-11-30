@@ -72,10 +72,10 @@
                                 <span class="badge">Super Driver</span>
                             </div>
                         </div>
-                        <form action="/saveReservation" method="POST" th:object="${reservation}">
+
+                        <form action="/saveReservation" method="POST" th:object="${reservation}" class="reserve-form" >
                             <input type="hidden" th:value="${ride.id}" name="rideid"><!-- fi blaset th:field="*{rideid}" th:value="${ride.id}"  -->
                             <input type="hidden" th:value="${userId}" name="userid">
-
                             <div class="input-group">
                                 <input type="number" name="reserve_place" placeholder="nbr places" min="1" max="4" th:field="*{nbr_places}" required>
                             </div>

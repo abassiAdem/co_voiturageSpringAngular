@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RideService {
@@ -21,6 +22,24 @@ public class RideService {
 
     public void saveRide(Ride ride) {
         rideRepository.save(ride);
+    }
+
+    public void decreaseAvailableSeats(Long rideId, int seats) {
+        Optional<Ride> optionalRide = rideRepository.findById(rideId);
+
+        if (optionalRide.isPresent()) {
+            Ride ride = optionalRide.get();
+            int updatedSeats = ride.getNbrPlaces() - seats;
+
+            if (updatedSeats >= 0) {
+                ride.setNbrPlaces(updatedSeats);
+                rideRepository.save(ride);
+            } else {
+                System.out.println("Pas assez de places disponibles.");
+            }
+        } else {
+            System.out.println("Trajet introuvable.");
+        }
     }
 
 

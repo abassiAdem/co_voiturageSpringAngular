@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ReservationController {
     @Autowired
     private ReservationService reservationService;
-
-
     @PostMapping("/saveReservation")
     public String saveReservation(@ModelAttribute("reservation") Reservation reservation) {
         reservationService.saveReservation(reservation);

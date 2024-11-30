@@ -17,6 +17,11 @@ public class ReservationService {
     @Autowired
     private RideService rideService;
 
+    public List<Reservation> findAllByUserid(Long id) {
+        return reservationRepository.findAllByUserid(id);
+    }
+
+
     public List<Long> findReservationIdByUserId(Long id) {
         return reservationRepository.findReservationIdByUserId(id);
     }
@@ -26,10 +31,11 @@ public class ReservationService {
         rideService.decreaseAvailableSeats(reservation.getRideid(), reservation.getNbr_places());
     }
 
-    public void backAvailableSeats(Reservation reservation) {
+    public void deleteReservation(Reservation reservation) {
 
-        rideService.backAvailableSeats(reservation.getRideid(), reservation.getNbr_places());
+        rideService.increaseAvailableSeats(reservation.getRideid(), reservation.getNbr_places());
         reservationRepository.delete(reservation);
     }
+
 
 }

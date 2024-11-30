@@ -2,6 +2,7 @@ package com.example.co_voiturage.controller;
 
 
 import com.example.co_voiturage.model.Reservation;
+import com.example.co_voiturage.model.ReservationRideDTO;
 import com.example.co_voiturage.model.Ride;
 import com.example.co_voiturage.model.User;
 import com.example.co_voiturage.service.ReservationService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,14 +32,49 @@ public class ReservationController {
         return "redirect:/rides";
     }
 
+/*
+    @GetMapping("/historie")
+    public String getAllReservations(HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("userId");
+        model.addAttribute("userId",userId);
+        List<Long> ids = reservationService.findReservationIdByUserId(userId);
+        model.addAttribute("listRides", rideService.findAllById(ids)  );
+        model.addAttribute("reservation", reservationService.findAllByUserid(userId) );
+        return "historie";
+    }*/
+
 
     @GetMapping("/historie")
     public String getAllReservations(HttpSession session, Model model) {
         Long userId = (Long) session.getAttribute("userId");
-        List<Long> ids = reservationService.findReservationIdByUserId(userId);
-        model.addAttribute("listRides", rideService.findAllById(ids)  );
+        model.addAttribute("userId",userId);
+        List<ReservationRideDTO> reservationRides = new ArrayList<>();
+
+        // Supposez que vous avez des méthodes appropriées pour obtenir les détails nécessaires
+        List<Reservation> reservations = reservationService.findAllByUserid(userId);
+
+        for (Reservation reservation : reservations) {
+            Ride ride = rideService.findById(reservation.getRideid());
+            ReservationRideDTO dto = new ReservationRideDTO();
+            dto.setReservation(reservation);
+            dto.setRide(ride);
+
+            reservationRides.add(dto);
+        }
+
+        model.addAttribute("reservationRides", reservationRides);
         return "historie";
     }
+
+    @PostMapping("/deleteReservation")
+    public String deleteReservation(@ModelAttribute("reservation") Reservation reservation) {
+
+        System.out.println(reservation.getRideid());
+        System.out.println(reservation.getNbr_places());
+        reservationService.deleteReservation(reservation);
+        return "redirect:/historie";
+    }
+
 
 
 

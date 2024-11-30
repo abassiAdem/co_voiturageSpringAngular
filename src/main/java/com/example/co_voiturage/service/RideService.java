@@ -1,16 +1,13 @@
 package com.example.co_voiturage.service;
 
 
-import com.example.co_voiturage.model.Reservation;
 import com.example.co_voiturage.model.Ride;
-import com.example.co_voiturage.repository.ReservationRepository;
 import com.example.co_voiturage.repository.RideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class RideService {
@@ -19,6 +16,11 @@ public class RideService {
     private RideRepository rideRepository;
     public List<Ride> getAllRides() {
         return rideRepository.findAll();
+    }
+
+    public Ride findById(Long rideid) {
+        Optional<Ride> ride =rideRepository.findById(rideid);
+        return ride.orElse(null);
     }
 
     public List<Ride> findAllById(List<Long> ids) {
@@ -51,7 +53,7 @@ public class RideService {
         }
     }
 
-    public void backAvailableSeats(Long rideId, int seats) {
+    public void increaseAvailableSeats(Long rideId, int seats) {
         Optional<Ride> optionalRide = rideRepository.findById(rideId);
 
         if (optionalRide.isPresent()) {

@@ -21,38 +21,48 @@
 
 <div class="container">
     <section class="publications">
-        <h2>Publications</h2>
+        <h2>Historie</h2>
         <div class="publication-list">
 
             <!-- Thymeleaf loop to display ride data -->
-            <div th:each="ride : ${listRides}">
+            <div th:each="reservationRides : ${reservationRides}">
                 <div class="publication-card">
                     <div class="details-row">
                         <div class="time-route">
                             <div class="time">
-                                <strong th:text="${ride.dateDepart}"></strong>
+                                <strong th:text="${reservationRides.ride.dateDepart}"></strong>
                             </div>
                             <div class="route">
-                                <span th:text="${ride.depart}"></span> ➝
-                                <span th:text="${ride.destination}"></span>
+                                <span th:text="${reservationRides.ride.depart}"></span> ➝
+                                <span th:text="${reservationRides.ride.destination}"></span>
                             </div>
                             <div class="route">
-                                <span>Places disponibles : </span><span th:text="${ride.nbrPlaces}"></span>
+                                <span>Places Reserved : </span><span th:text="${reservationRides.reservation.nbr_places}"></span>
                             </div>
                         </div>
                         <div class="price">
-                            <span th:text="${ride.price + ' DT'}"></span>
+                            <span th:text="${reservationRides.ride.price*reservationRides.reservation.nbr_places + ' DT'}"></span>
                         </div>
+
                     </div>
                     <div class="driver-row">
                         <div class="driver-info">
                             <img th:src="@{'/path/to/profile-pic.jpg'}" alt="Driver Picture" class="profile-pic">
                             <div>
-                                <span th:text="${ride.name}"></span>
+                                <span th:text="${reservationRides.ride.name}"></span>
                                 <span class="rating">⭐</span>
                                 <span class="badge">Super Driver</span>
                             </div>
                         </div>
+
+                        <form action="/deleteReservation" method="POST" th:object="${reservation}">
+                            <input type="hidden" th:value="${reservationRides.reservation.id}" name="id">
+                            <input type="hidden" th:value="${reservationRides.reservation.rideid}" name="rideid">
+                            <input type="hidden" th:value="${userId}" name="userid">
+                            <input type="hidden" th:value="${reservationRides.reservation.nbr_places}" name="nbr_places">
+
+                            <button type="submit">Annullation</button>
+                        </form>
 
 
                     </div>

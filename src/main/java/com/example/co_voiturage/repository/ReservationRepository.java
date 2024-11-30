@@ -11,7 +11,10 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findAllByUserid(Long userid);
+
     @Query("SELECT rideid FROM Reservation  WHERE userid = :userId")
     List<Long> findReservationIdByUserId(Long userId);
+
+
 
 }

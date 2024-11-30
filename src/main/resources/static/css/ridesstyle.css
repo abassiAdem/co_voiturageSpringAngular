@@ -7,6 +7,11 @@
     top: 0;
     z-index: 1000;
 }
+.navbar ul li img,
+.navbar ul li i {
+    margin-right: 10px;
+    vertical-align: middle;
+}
 
 .navbar ul {
     list-style: none;

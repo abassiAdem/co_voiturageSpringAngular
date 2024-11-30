@@ -77,8 +77,6 @@ public class AuthController {
         return "profile";
     }
 
-
-
     @GetMapping("/logout")
     public String logoutUser(HttpSession session) {
         session.invalidate();

@@ -1,5 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    padding: 15px 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.navbar ul li img,
+.navbar ul li i {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar ul li {
+    margin: 0 15px;
+}
+
+.navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.navbar ul li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #f9a825;
+}
+
+
+
 * {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -14,20 +59,25 @@ section {
 }
 
 /* --------------------------------------------titre---------------------------------------------- */
+.title h1,
+.title p {
+    color: #111;
+    text-align: center;
+}
 .title h1 {
 
     font-size: 3em;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
 .title p {
     padding: 20px;
 }
 
-.title h1,
-.title p {
-    color: #111;
-    text-align: center;
-}
+
 
 /*--------------------------------------------profile----------------------------------------------*/
 .container {
@@ -86,4 +136,15 @@ form .txt_field {
 .newlbl {
     font-size: large;
     color: #7b7b81;
+}
+
+.center h2 {
+    font-size: 2.5em;
+    text-align: center;
+    padding: 2px;
+    border-bottom: 1px solid #111;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
 }

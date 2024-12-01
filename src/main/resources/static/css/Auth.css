@@ -308,3 +308,15 @@ form .txt_field {
         width: 90%;
     }
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .center {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .txt_field2 {
+        flex-direction: column;
+    }
+}

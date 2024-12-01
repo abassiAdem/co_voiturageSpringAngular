@@ -280,3 +280,16 @@ button:hover {
 .profile-pic:hover {
     transform: scale(1.1);
 }
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .center {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .txt_field2 {
+        flex-direction: column;
+    }
+}

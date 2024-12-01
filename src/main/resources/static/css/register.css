@@ -118,3 +118,10 @@ p{
     text-align: center;
     padding: 5px;
 }
+
+/* Responsive Design */
+@media (max-width:320px) {
+    form {
+        width: 90%;
+    }
+}

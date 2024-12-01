@@ -149,6 +149,35 @@ form .txt_field {
     color: transparent;
 }
 
+#MonRides {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#MonRides .button {
+    display: inline-block;
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px; /* Rounded edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s, box-shadow 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+#MonRides .button:hover {
+    background: linear-gradient(90deg, #0056b3, #003d80); /* Darker gradient on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Elevated shadow */
+    transform: translateY(-2px); /* Slight lift on hover */
+    color: #f9a825;
+}
+#MonRides .button i {
+    margin-right: 8px;
+}
+
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

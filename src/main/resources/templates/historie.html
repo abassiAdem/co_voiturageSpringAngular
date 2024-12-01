@@ -22,10 +22,9 @@
 
 <div class="container">
     <section class="publications">
-        <h2>Current Ride</h2>
+        <h2><i class="fas fa-hourglass-start"></i> Current Ride</h2>
         <div class="publication-list">
 
-            <!-- Thymeleaf loop to display ride data -->
             <div th:each="reservationRides : ${reservationRides}">
                 <div class="publication-card">
                     <div class="details-row">
@@ -77,10 +76,9 @@
 
 <div class="container">
     <section class="publications">
-        <h2>Pasted Ride</h2>
+        <h2><i class="fas fa-close"></i> Pasted Ride</h2>
         <div class="publication-list">
 
-            <!-- Thymeleaf loop to display ride data -->
             <div th:each="reservationRides : ${pasedreservationRides}">
                 <div class="publication-card">
                     <div class="details-row">

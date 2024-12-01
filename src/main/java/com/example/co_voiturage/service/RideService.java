@@ -6,6 +6,7 @@ import com.example.co_voiturage.repository.RideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,17 +15,20 @@ public class RideService {
 
     @Autowired
     private RideRepository rideRepository;
-    public List<Ride> getAllRides() {
-        return rideRepository.findAll();
+
+
+    public List<Ride> findByUserId(Long userId) {
+        return rideRepository.findByUserId(userId);
     }
+
+    public List<Ride> getAllRideByDateDepartAfter(String dateDepartAfter) {
+        return rideRepository.getAllRideByDateDepartAfter(dateDepartAfter);
+    }
+
 
     public Ride findById(Long rideid) {
         Optional<Ride> ride =rideRepository.findById(rideid);
         return ride.orElse(null);
-    }
-
-    public List<Ride> findAllById(List<Long> ids) {
-        return rideRepository.findAllById(ids);
     }
 
     public List<Ride> searchRide(String dateDepart, String destination, String depart, int nbrPlaces ) {

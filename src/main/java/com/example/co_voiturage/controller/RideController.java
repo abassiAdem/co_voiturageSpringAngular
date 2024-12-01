@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -23,10 +24,11 @@ public class RideController {
 
     @GetMapping("/rides")
     public String viewRidesPage(HttpSession session, Model model) {
-
+        String currentDate = LocalDate.now().toString();
         String userRole = (String) session.getAttribute("userRole");//aAutomatically retrieved
         Long userId = (Long) session.getAttribute("userId");//aAutomatically retrieved
-        model.addAttribute("listRides", rideService.getAllRides());
+
+        model.addAttribute("listRides", rideService.getAllRideByDateDepartAfter(currentDate));
         model.addAttribute("userRole",userRole);
         model.addAttribute("userId",userId);
         model.addAttribute("reservation",new Reservation());
@@ -51,10 +53,12 @@ public class RideController {
     }
 
 
+
     @PostMapping("/UserHomePage")
     public String filterRides(@RequestParam String depart, @RequestParam String destination,
-                              @RequestParam String date_depart, @RequestParam int nbr_places, Model model) {
+                              @RequestParam String date_depart, @RequestParam int nbr_places,Model model) {
 
+        model.addAttribute("today", LocalDate.now());
         model.addAttribute("listRides", rideService.searchRide(date_depart, destination, depart, nbr_places));
         model.addAttribute("reservation",new Reservation());
         return "rides";
@@ -63,7 +67,12 @@ public class RideController {
 
 
 
-
+   @GetMapping("/test")
+    public String myRides(HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("userId");
+        model.addAttribute("myRides", rideService.findByUserId(userId));
+        return "test";
+    }
 
 
 

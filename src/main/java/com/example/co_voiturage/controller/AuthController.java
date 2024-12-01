@@ -72,7 +72,9 @@ public class AuthController {
     @GetMapping("/profile")
     public String profileUser(HttpSession session, Model model) {
         Long userId = (Long) session.getAttribute("userId");
+        String userRole = (String) session.getAttribute("userRole");
         model.addAttribute("user", userService.findByid(userId));
+        model.addAttribute("userRole",userRole);
 
         return "profile";
     }

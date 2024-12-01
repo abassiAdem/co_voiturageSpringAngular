@@ -43,7 +43,7 @@ h1 {
     padding: 30px 5px 50px 5px;
 }
 h1 span{
-    color: #002b5c;
+    color: #007bff;
 }
 form {
     display: flex;
@@ -93,7 +93,7 @@ form .txt_field2 {
     width: 50%;
     height: 50px;
     border: 1px solid;
-    background: #002b5c;
+    background: #007bff;
     font-size: 18px;
     color: #e9f4fb;
     font-weight: 700;

@@ -33,21 +33,11 @@ public class ReservationController {
         return "redirect:/rides";
     }
 
-/*
     @GetMapping("/historie")
     public String getAllReservations(HttpSession session, Model model) {
         Long userId = (Long) session.getAttribute("userId");
-        model.addAttribute("userId",userId);
-        List<Long> ids = reservationService.findReservationIdByUserId(userId);
-        model.addAttribute("listRides", rideService.findAllById(ids)  );
-        model.addAttribute("reservation", reservationService.findAllByUserid(userId) );
-        return "historie";
-    }*/
-
-
-    @GetMapping("/historie")
-    public String getAllReservations(HttpSession session, Model model) {
-        Long userId = (Long) session.getAttribute("userId");
+        String userRole = (String) session.getAttribute("userRole");
+        model.addAttribute("userRole",userRole);
         model.addAttribute("userId",userId);
         LocalDate currentDate = LocalDate.now();
         List<ReservationRideDTO> reservationRides = new ArrayList<>();

@@ -80,6 +80,7 @@
             .openPopup();
 
         let currentField = null;
+
         function showCurrentLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
@@ -93,17 +94,18 @@
                 console.error("La géolocalisation n'est pas supportée par ce navigateur.");
             }
         }
-        document.getElementById('departMapIcon').addEventListener('click', function() {
+
+        document.getElementById('departMapIcon').addEventListener('click', function () {
             currentField = 'depart';
             mapContainer.style.display = 'block';
             showCurrentLocation();
         });
-        document.getElementById('destinationMapIcon').addEventListener('click', function() {
+        document.getElementById('destinationMapIcon').addEventListener('click', function () {
             currentField = 'destination';
             mapContainer.style.display = 'block';
             showCurrentLocation();
         });
-        map.on('click', function(e) {
+        map.on('click', function (e) {
             let latlng = e.latlng;
             marker.setLatLng(latlng);
             fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latlng.lat}&lon=${latlng.lng}`)
@@ -115,10 +117,15 @@
                 })
                 .catch(error => console.log('Erreur dans la récupération de l’adresse: ', error));
         });
-        document.getElementById('closeMapButton').addEventListener('click', function() {
+        document.getElementById('closeMapButton').addEventListener('click', function () {
             mapContainer.style.display = 'none';
         });
     });
+
+
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date_depart').setAttribute('min', today);
+
 </script>
 
 </body>

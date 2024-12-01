@@ -23,20 +23,14 @@
             <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </nav>
-
-
     <section class="container" id="Mon-Profile">
-
         <div class="title">
             <h1>les informations de votre profile</h1>
             <p>Vous pouvez modifier vos informations ou bloquer vos compte </p>
         </div>
-
         <div class="center">
             <h2>User</h2>
-
             <div class="con-center">
-
                 <form action="/profile" class="nom" >
                     <div class="txt_field">
                         <label class="org" >Nom :</label>
@@ -79,7 +73,11 @@
 
         </div>
 
-    </section><!-- fin mon-profile -->
+        <div th:if="${userRole != null && userRole == 'conducteur'}" class="container" id="MonRides">
+            <a href="/test" class="button"><i class="fas fa-car"></i> Gerer Vos Publications</a>
+        </div>
+    </section>
+
     <script >
         function Click() {
             var r = confirm("Voulez-vous vraiment bloquer votre compte ?")

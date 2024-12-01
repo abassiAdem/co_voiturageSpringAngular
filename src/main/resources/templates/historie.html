@@ -22,7 +22,7 @@
 
 <div class="container">
     <section class="publications">
-        <h2>Historie</h2>
+        <h2>Current Ride</h2>
         <div class="publication-list">
 
             <!-- Thymeleaf loop to display ride data -->
@@ -38,11 +38,11 @@
                                 <span th:text="${reservationRides.ride.destination}"></span>
                             </div>
                             <div class="route">
-                                <span>Places Reserved : </span><span th:text="${reservationRides.reservation.nbr_places}"></span>
+                                <span><strong>Places Reserved :</strong> </span><span th:text="${reservationRides.reservation.nbr_places}"></span>
                             </div>
                         </div>
                         <div class="price">
-                            <span th:text="${reservationRides.ride.price*reservationRides.reservation.nbr_places + ' DT'}"></span>
+                            <span th:text="${'Total : '+ reservationRides.ride.price*reservationRides.reservation.nbr_places + ' DT'}"></span>
                         </div>
 
                     </div>
@@ -65,6 +65,51 @@
                             <button type="submit">Annullation</button>
                         </form>
 
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<div class="container">
+    <section class="publications">
+        <h2>Pasted Ride</h2>
+        <div class="publication-list">
+
+            <!-- Thymeleaf loop to display ride data -->
+            <div th:each="reservationRides : ${pasedreservationRides}">
+                <div class="publication-card">
+                    <div class="details-row">
+                        <div class="time-route">
+                            <div class="time">
+                                <strong th:text="${reservationRides.ride.dateDepart}"></strong>
+                            </div>
+                            <div class="route">
+                                <span th:text="${reservationRides.ride.depart}"></span> ➝
+                                <span th:text="${reservationRides.ride.destination}"></span>
+                            </div>
+                            <div class="route">
+                                <span><strong>Places Reserved :</strong> </span><span th:text="${reservationRides.reservation.nbr_places}"></span>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <span th:text="${'Total : '+ reservationRides.ride.price*reservationRides.reservation.nbr_places + ' DT'}"></span>
+                        </div>
+
+                    </div>
+                    <div class="driver-row">
+                        <div class="driver-info">
+                            <img th:src="@{'/path/to/profile-pic.jpg'}" alt="Driver Picture" class="profile-pic">
+                            <div>
+                                <span th:text="${reservationRides.ride.name}"></span>
+                                <span class="rating">⭐</span>
+                                <span class="badge">Super Driver</span>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

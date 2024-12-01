@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,20 +49,27 @@ public class ReservationController {
     public String getAllReservations(HttpSession session, Model model) {
         Long userId = (Long) session.getAttribute("userId");
         model.addAttribute("userId",userId);
+        LocalDate currentDate = LocalDate.now();
         List<ReservationRideDTO> reservationRides = new ArrayList<>();
-
+        List<ReservationRideDTO> pasedreservationRides = new ArrayList<>();
         List<Reservation> reservations = reservationService.findAllByUserid(userId);
-
         for (Reservation reservation : reservations) {
             Ride ride = rideService.findById(reservation.getRideid());
+            if(LocalDate.parse(ride.getDateDepart()).isBefore(currentDate)){
+                ReservationRideDTO pdto = new ReservationRideDTO();
+                pdto.setReservation(reservation);
+                pdto.setRide(ride);
+                pasedreservationRides.add(pdto);
+            }
+            else{
             ReservationRideDTO dto = new ReservationRideDTO();
             dto.setReservation(reservation);
             dto.setRide(ride);
 
-            reservationRides.add(dto);
+            reservationRides.add(dto);}
         }
-
         model.addAttribute("reservationRides", reservationRides);
+        model.addAttribute("pasedreservationRides", pasedreservationRides);
         return "historie";
     }
 

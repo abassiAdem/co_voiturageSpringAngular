@@ -78,7 +78,8 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public String logoutUser(HttpSession session) {
+    public String logoutUser(HttpSession session,Model model) {
+        model.asMap().clear();
         session.invalidate();
         return "redirect:/Auth";
     }

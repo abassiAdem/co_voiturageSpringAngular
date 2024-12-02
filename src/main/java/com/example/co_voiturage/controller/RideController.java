@@ -1,8 +1,9 @@
 package com.example.co_voiturage.controller;
 
-
 import com.example.co_voiturage.model.Reservation;
+import com.example.co_voiturage.model.Reviews;
 import com.example.co_voiturage.model.Ride;
+import com.example.co_voiturage.service.ReviewsService;
 import com.example.co_voiturage.service.RideService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +22,36 @@ public class RideController {
     @Autowired
     private RideService rideService;
 
+    @Autowired
+    private ReviewsService reviewsService;
+
+    @GetMapping("/rideDetails")
+    public String showRideDetails(@RequestParam("rideId") Long rideId, Model model,HttpSession session) {
+        String userName = (String) session.getAttribute("userName");
+
+        model.addAttribute("userName",userName);
+        Ride ride = rideService.findById(rideId);
+        if (ride == null) {
+            return "redirect:/rides";
+        }
+        List<Reviews> reviews = reviewsService.getAllReviews(ride.getUserId());
+        model.addAttribute("ride", ride);
+        model.addAttribute("reviews", reviews);
+        model.addAttribute("rev", new Reviews());
+        return "rideDetails";
+    }
 
     @GetMapping("/rides")
     public String viewRidesPage(HttpSession session, Model model) {
         String currentDate = LocalDate.now().toString();
-        String userRole = (String) session.getAttribute("userRole");//aAutomatically retrieved
-        Long userId = (Long) session.getAttribute("userId");//aAutomatically retrieved
+        String userRole = (String) session.getAttribute("userRole");
+        Long userId = (Long) session.getAttribute("userId");
 
         model.addAttribute("listRides", rideService.getAllRideByDateDepartAfter(currentDate));
         model.addAttribute("userRole",userRole);
         model.addAttribute("userId",userId);
         model.addAttribute("reservation",new Reservation());
+
         return "rides";
     }
 
@@ -67,16 +87,12 @@ public class RideController {
 
 
 
-   @GetMapping("/test")
+   @GetMapping("/MonRides")
     public String myRides(HttpSession session, Model model) {
         Long userId = (Long) session.getAttribute("userId");
         model.addAttribute("myRides", rideService.findByUserId(userId));
-        return "test";
+        return "MonRides";
     }
-
-
-
-
 
 
 

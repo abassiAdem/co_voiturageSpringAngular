@@ -1,10 +1,7 @@
 package com.example.co_voiturage.controller;
 
 
-import com.example.co_voiturage.model.Reservation;
-import com.example.co_voiturage.model.ReservationRideDTO;
-import com.example.co_voiturage.model.Ride;
-import com.example.co_voiturage.model.User;
+import com.example.co_voiturage.model.*;
 import com.example.co_voiturage.service.ReservationService;
 import com.example.co_voiturage.service.RideService;
 import jakarta.servlet.http.HttpSession;
@@ -35,6 +32,10 @@ public class ReservationController {
 
     @GetMapping("/historie")
     public String getAllReservations(HttpSession session, Model model) {
+
+        String userName = (String) session.getAttribute("userName");
+        model.addAttribute("userName",userName);
+        model.addAttribute("rev", new Reviews());
         Long userId = (Long) session.getAttribute("userId");
         String userRole = (String) session.getAttribute("userRole");
         model.addAttribute("userRole",userRole);

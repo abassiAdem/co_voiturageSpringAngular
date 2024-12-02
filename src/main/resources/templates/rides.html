@@ -43,14 +43,16 @@
 
 <div class="container">
     <section class="publications">
-        <div class="publication-list">
+        <div class="publication-list" >
 
             <div th:each="ride : ${listRides}">
                 <div class="publication-card">
-                    <div class="details-row">
+
+                    <div class="details-row" th:onclick="'window.location.href=\'/rideDetails?rideId=' + ${ride.id} + '\''">
                         <div class="time-route">
                             <div class="time">
                                 <strong th:text="${ride.dateDepart}"></strong>
+
                             </div>
                             <div class="route">
                                 <span th:text="${ride.depart}"></span> ➝
@@ -67,7 +69,7 @@
                     <div class="driver-row">
                         <div class="driver-info">
                             <img th:src="@{'/path/to/profile-pic.jpg'}" alt="Driver Picture" class="profile-pic">
-                            <div>
+                            <div >
                                 <span th:text="${ride.name}"></span>
                                 <span class="rating" >⭐</span>
                                 <span class="badge">Super Driver</span>
@@ -83,9 +85,10 @@
                             <button type="submit">Réserver</button>
                         </form>
 
+
+
                     </div>
                 </div>
-
             </div>
 
         </div>

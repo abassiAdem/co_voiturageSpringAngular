@@ -109,6 +109,14 @@
                             </div>
                         </div>
 
+                        <!-- review -->
+                        <form action="/makeReview" method="post" th:object="${rev}">
+                            <input type="hidden" name="conducteurid" th:value="${reservationRides.ride.userId}">
+                            <input type="hidden" name="author" th:value="${userName}">
+                            <input type="text" name="comment" th:field="*{comment}">
+                            <button type="submit">Make Review</button>
+                        </form>
+
                     </div>
                 </div>
 

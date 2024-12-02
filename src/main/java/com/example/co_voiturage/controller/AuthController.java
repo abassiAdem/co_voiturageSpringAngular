@@ -58,7 +58,7 @@ public class AuthController {
     @GetMapping("/riderregister")
     public String showriderRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-        return "riderregister";
+        return "rideregister";
     }
 
     @PostMapping("/riderregister")

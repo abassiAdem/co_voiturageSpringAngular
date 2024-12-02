@@ -24,6 +24,7 @@
 
     <form action="/saveRide" method="post" th:object="${ride}">
         <input type="hidden" th:value="${userId}" name="userId">
+        <input type="hidden" th:value="${userName}" name="name">
         <div class="txt_field2">
             <div class="text">
                 <div class="input-wrapper">

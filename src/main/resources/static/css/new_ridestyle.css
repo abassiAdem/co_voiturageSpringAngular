@@ -95,6 +95,7 @@ body {
     cursor: pointer;
     margin-left: 5px;
 }
+
 #mapContainer {
     display: none;
     width: 100%;
